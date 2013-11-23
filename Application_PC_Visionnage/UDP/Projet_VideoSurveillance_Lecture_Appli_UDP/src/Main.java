@@ -3,6 +3,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+//TEEEEST
+
 public class Main {
 
 	/**
@@ -11,12 +13,12 @@ public class Main {
 	
 	
 	//TODO Mise en place UDP [OK]
-	//TODO Ajouter système d'authentification par ip (UDP) lors de la récéption de chaque requete, ou rechercher une autre solution. [OK]
-	//TODO Régler bug lors de 3 clients sur même poste... [OK] => fixed with a sleep, threadlecture accedait à la liste alors que l'objet n'était pas encore initialisé totalement.
-	//TODO Faire système de une fenetre avec un panel par connexion [OK]
+	//TODO Ajouter systï¿½me d'authentification par ip (UDP) lors de la rï¿½cï¿½ption de chaque requete, ou rechercher une autre solution. [OK]
+	//TODO Rï¿½gler bug lors de 3 clients sur mï¿½me poste... [OK] => fixed with a sleep, threadlecture accedait ï¿½ la liste alors que l'objet n'ï¿½tait pas encore initialisï¿½ totalement.
+	//TODO Faire systï¿½me de une fenetre avec un panel par connexion [OK]
 	//TODO Mettre en place github
-	//TODO Gérer les déconnections
-	//TODO Gérer tous les closes 
+	//TODO Gï¿½rer les dï¿½connections
+	//TODO Gï¿½rer tous les closes 
 	//TODO Rajouter des trucs graphiques (TRES OPTIONNEL)
 	
 	public static final String PATH = "C:\\Users\\rben-hmidane\\Desktop\\image_recue.jpg";
@@ -25,21 +27,21 @@ public class Main {
 	public static final int PORT_TCP = 2000;
 	public static final int PORT_UDP = 2001;
 	public static final int bufferSize = 30000; // A changer en fonction de la taille de l'image
-	public static final int LocationFenetreX = 2000; // vaut  2000 pour un double écran, pour unique écran, changer à 500.
+	public static final int LocationFenetreX = 2000; // vaut  2000 pour un double ï¿½cran, pour unique ï¿½cran, changer ï¿½ 500.
 	public static final int LocationFenetreY = 300;
 	public static final int NombreMaxConnections = 5;
-	public static final long nbMilliSecondesLatence = 1500; // temps de pause à chaque ajout d'image.
+	public static final long nbMilliSecondesLatence = 1500; // temps de pause ï¿½ chaque ajout d'image.
 	
-	public static final boolean MultiClientSurMemeOrdi = true; // mettre à true si plusieurs clients peuvent être connectés sur le même
-															   // ordinateur, cependant, les performances peuvent être très
-															   // ralenties car l'algorithme parcourt systématiquement 
-															   // toute la liste de clients. En prod, la valeur doit être à FALSE.
+	public static final boolean MultiClientSurMemeOrdi = true; // mettre ï¿½ true si plusieurs clients peuvent ï¿½tre connectï¿½s sur le mï¿½me
+															   // ordinateur, cependant, les performances peuvent ï¿½tre trï¿½s
+															   // ralenties car l'algorithme parcourt systï¿½matiquement 
+															   // toute la liste de clients. En prod, la valeur doit ï¿½tre ï¿½ FALSE.
 	
 	
 	public static void main(String[] args) {
 		
 		
-		ArrayList<Connexion> listeDeConnexions = new ArrayList<Connexion>(); // Liste des utilisateurs connectés
+		ArrayList<Connexion> listeDeConnexions = new ArrayList<Connexion>(); // Liste des utilisateurs connectï¿½s
 		Fenetre fenetre = new Fenetre();
 		ThreadLecture threadLecture = new ThreadLecture(listeDeConnexions);
 		
@@ -47,9 +49,9 @@ public class Main {
 		try {
 			ServerSocket SocketServeur = new ServerSocket(2000);
 			
-			//Autorise 5 connexions simultannées max
+			//Autorise 5 connexions simultannï¿½es max
 			for(int i = 0; i<Main.NombreMaxConnections; i++) {
-				// Attente de connexion ...               ( à cause de SocketServeur.accept() ) 				
+				// Attente de connexion ...               ( ï¿½ cause de SocketServeur.accept() ) 				
 				try {
 					Socket s = SocketServeur.accept();
 					threadLecture.sleep(Main.nbMilliSecondesLatence);
