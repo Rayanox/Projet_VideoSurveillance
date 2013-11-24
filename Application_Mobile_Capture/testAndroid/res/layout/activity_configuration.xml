@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#33CCFF"
+    tools:context=".MainActivity" >
+
+    <Button
+        android:id="@+id/btn_configServeur"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:background="#3366FF"
+        android:gravity="center"
+        android:text="@string/bouton_configServeur"
+        android:textColor="#FFFFFF"
+        android:textSize="35sp" />
+    	
+    <Button
+        android:id="@+id/btn_configCapture"
+        android:layout_width="211dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="#3366FF"
+        android:gravity="center"
+        android:text="@string/bouton_configCapture"
+        android:textColor="#FFFFFF"
+        android:textSize="35sp" />
+
+    <Button
+        android:id="@+id/btn_configRetour"
+        android:layout_width="216dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="#3366FF"
+        android:gravity="center"
+        android:text="@string/bouton_Retour"
+        android:textColor="#FFFFFF"
+        android:textSize="35sp" />
+</LinearLayout>

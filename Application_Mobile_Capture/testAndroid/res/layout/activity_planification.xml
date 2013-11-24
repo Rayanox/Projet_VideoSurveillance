@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#33CCFF"
+    tools:context=".MainActivity" >
+
+   <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/txtview_planificationTitre"
+        android:textSize="25sp"
+        android:textColor="@android:color/black" 
+        android:layout_marginBottom="5dp" />
+   
+    <CheckBox
+        android:id="@+id/chkbox_planificationBool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chkbox_planificationBool" />
+    
+     <ListView
+		android:id="@+id/lstview_planifHeureDebut"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+	</ListView>
+    
+    <Button
+        android:id="@+id/btn_planifEnregistrer"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:background="#3366FF"
+        android:gravity="center"
+        android:text="@string/bouton_planifEnregistrer"
+        android:textColor="#FFFFFF"
+        android:textSize="35sp" />
+    	
+    <Button
+        android:id="@+id/btn_modeRetour"
+        android:layout_width="211dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="#3366FF"
+        android:gravity="center"
+        android:text="@string/bouton_Retour"
+        android:textColor="#FFFFFF"
+        android:textSize="35sp" />
+</LinearLayout>
