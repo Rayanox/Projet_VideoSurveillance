@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#33CCFF"
+    tools:context=".MainActivity" >
+	
+     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/txtview_serveurActivity"
+        android:textSize="25sp"
+        android:textColor="@android:color/black" 
+        android:layout_marginBottom="45dp" />
+     
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/txtview_adrIPServeur"
+        android:textSize="15sp"
+        android:textColor="@android:color/black" />
+    
+    <EditText
+        android:id="@+id/edt_adrIP"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="@string/edt_adrIPServeur"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:hint="@string/hint_edt_AdrIPServeur"
+   		android:inputType="text" />
+    	
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/txtview_portServeur"
+        android:textSize="15sp"
+        android:textColor="@android:color/black" />
+    
+      <EditText
+        android:id="@+id/edt_portServeur"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="@string/edt_portServeur"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:hint="@string/hint_edt_portServeur"
+        android:inputType="number"
+      />
+    
+    <Button
+        android:id="@+id/btn_servEnregistrer"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:background="#3366FF"
+        android:gravity="center"
+        android:text="@string/bouton_servEnregistrer"
+        android:textColor="#FFFFFF"
+        android:textSize="35sp" />
+    
+     <Button
+        android:id="@+id/btn_servRetour"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="#3366FF"
+        android:gravity="center"
+        android:text="@string/bouton_Retour"
+        android:textColor="#FFFFFF"
+        android:textSize="35sp" />
+</LinearLayout>
