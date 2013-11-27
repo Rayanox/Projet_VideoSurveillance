@@ -47,7 +47,7 @@ public class Main {
 		
 		
 		try {
-			ServerSocket SocketServeur = new ServerSocket(2000);
+			ServerSocket SocketServeur = new ServerSocket(PORT_TCP);
 			
 			//Autorise 5 connexions simultann�es max
 			for(int i = 0; i<Main.NombreMaxConnections; i++) {

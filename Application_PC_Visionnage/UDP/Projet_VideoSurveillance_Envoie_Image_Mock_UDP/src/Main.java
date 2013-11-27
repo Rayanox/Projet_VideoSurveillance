@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -8,8 +9,8 @@ public class Main {
 	public static final int PORT = 2000;
 	public static final int PORT_UDP = 2001;
 
-	public static final String PATH_FILE_IN1 = "C:\\Users\\rben-hmidane\\Desktop\\images.jpg";
-	public static final String PATH_FILE_IN2 = "C:\\Users\\rben-hmidane\\Desktop\\BEN-HMIDANE_Rayane.jpg";
+	public static final String PATH_FILE_IN1 = "bin\\images.jpg";
+	public static final String PATH_FILE_IN2 = "bin\\BEN-HMIDANE_Rayane.jpg";
 	public static final int bufferSize = 30000;
 
 	public static void main(String[] args) {

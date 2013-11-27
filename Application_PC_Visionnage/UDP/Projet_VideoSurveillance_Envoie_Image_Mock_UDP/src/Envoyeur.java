@@ -40,7 +40,7 @@ public class Envoyeur {
 			e1.printStackTrace();
 		}
 		
-		this.fichier = new File(this.pathFile);
+		this.fichier = new File(Main.PATH_FILE_IN1);
 		this.fichier2 = new File(Main.PATH_FILE_IN2);
 		
 		try {
