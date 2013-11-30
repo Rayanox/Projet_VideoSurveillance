@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.testandroid.MainActivity"
+            android:name="com.example.avds.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,8 +23,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.testandroid.ConfigurationActivity"
-            android:label="@string/app_name" >
+            android:name="com.example.avds.ConfigurationActivity">
+        </activity>
+         <activity
+            android:name="com.example.avds.CameraActivity">
+        </activity>
+         <activity
+            android:name="com.example.avds.CaptureActivity">
+        </activity>
+         <activity
+            android:name="com.example.avds.GeneralActivity">
+        </activity>
+         <activity
+            android:name="com.example.avds.ModeActivity">
+        </activity>
+         <activity
+            android:name="com.example.avds.PlanificationActivity">
+        </activity>
+         <activity
+            android:name="com.example.avds.ServerActivity">
         </activity>
     </application>
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

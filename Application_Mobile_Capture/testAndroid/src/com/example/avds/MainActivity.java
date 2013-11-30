@@ -1,10 +1,12 @@
-package com.example.testandroid;
+package com.example.avds;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+
+import com.example.testandroid.R;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -21,20 +23,15 @@ import android.view.View.OnClickListener;
 public class MainActivity extends Activity {
 	
 	
-	public static final String IP = "192.168.3.84"; //Mettre l'IP du serveur (ne surtout pas mettre 127.0.0.1 car c'est le localhost de la machine virtuel qui est différent de celui du pc)
+	public static final String IP = "192.168.3.84"; //Mettre l'IP du serveur (ne surtout pas mettre 127.0.0.1 car c'est le localhost de la machine virtuel qui est diffï¿½rent de celui du pc)
 	public static final int PORT = 2000;
 	public static final int PORT_UDP = 2001;
-	public static final int bufferSize = 30000; //Taille maximale d'un fichier image (à réduire au plus possible en fonction de la taille des images que l'on va envoyer)
+	public static final int bufferSize = 30000; //Taille maximale d'un fichier image (ï¿½ rï¿½duire au plus possible en fonction de la taille des images que l'on va envoyer)
 
 	public static final String PATH_FILE_IN1 = Environment.getExternalStorageDirectory().getPath()+"/Download/TestMe.jpg";
 	public static final String PATH_FILE_IN2 = Environment.getExternalStorageDirectory().getPath()+"/Download/TestMe.jpg";
-
-	
 	
 	private Envoyeur envoyeur;
-	
-	
-	
 	
 	public void onDestroy() {
 		System.out.println("On quitte le programme");
@@ -48,8 +45,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		final Button loginButton = (Button) findViewById(R.id.btn_config);
-		  loginButton.setOnClickListener(new OnClickListener() {
+		final Button configButton = (Button) findViewById(R.id.btn_config);
+		configButton.setOnClickListener(new OnClickListener() {
 					
 		  @Override
 		  public void onClick(View v) {
@@ -58,13 +55,20 @@ public class MainActivity extends Activity {
 		  }
 		});
 		  
+		  final Button QuitButton = (Button) findViewById(R.id.btn_quitter);
+		  QuitButton.setOnClickListener(new OnClickListener() {
+					
+		  @Override
+		  public void onClick(View v) {
+			finish();
+		  }
+		});
+		  
 		  final Button CaptureButton = (Button) findViewById(R.id.btn_demarrer);
 		  CaptureButton.setOnClickListener(new OnClickListener() {
 					
 		  @Override
-		  public void onClick(View v) {
-			  
-			  			  
+		  public void onClick(View v) {  			  
 			  try {
 					envoyeur = new Envoyeur(InetAddress.getByName(IP), PORT);
 
@@ -79,9 +83,8 @@ public class MainActivity extends Activity {
 						// TODO Auto-generated catch block
 						
 						e.printStackTrace();
-						System.out.println("Connection échouée");
+						System.out.println("Connection ï¿½chouï¿½e");
 					}
-					
 					
 					// envoyeur.close(); faits par le receveur
 					// receveur.close();
@@ -90,10 +93,6 @@ public class MainActivity extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			  
-			  
-			  
-			  
 		  }
 		});  
 	}

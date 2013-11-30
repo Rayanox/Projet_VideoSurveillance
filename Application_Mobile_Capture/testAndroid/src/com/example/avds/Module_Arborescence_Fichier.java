@@ -1,4 +1,4 @@
-package com.example.testandroid;
+package com.example.avds;
 
 
 import java.io.File;

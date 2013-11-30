@@ -1,4 +1,4 @@
-package com.example.testandroid;
+package com.example.avds;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -58,7 +58,7 @@ public class Envoyeur {
 	
 	public void seConnecterAuServeur() throws IOException {
 		this.socketConnection = new Socket(this.IP, this.port);
-		System.out.println("Connection réussie");
+		System.out.println("Connection rï¿½ussie");
 	}
 
 	public void envoyerFile() {
@@ -92,7 +92,7 @@ public class Envoyeur {
 				
 				
 			
-				System.out.println("(envoyeur) : envoie de fichier réussie "+compteur++);
+				System.out.println("(envoyeur) : envoie de fichier rï¿½ussie "+compteur++);
 				b = new byte[MainActivity.bufferSize];
 				fichier1Tour = !fichier1Tour;
 				try {
@@ -104,7 +104,7 @@ public class Envoyeur {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				System.out.println("(envoyeur) : envoie de fichier échoué");
+				System.out.println("(envoyeur) : envoie de fichier ï¿½chouï¿½");
 			}
 		}
 		
@@ -127,14 +127,14 @@ public class Envoyeur {
 		try {
 			this.bufferLectureFichier1.close();
 			this.bufferLectureFichier2.close();
-			System.out.println("Fermeture Buffers 1 et 2 réussie");
+			System.out.println("Fermeture Buffers 1 et 2 rï¿½ussie");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			this.socket.close();
-			System.out.println("Fermeture socket réussie");
+			System.out.println("Fermeture socket rï¿½ussie");
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

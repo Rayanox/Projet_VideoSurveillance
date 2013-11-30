@@ -6,5 +6,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JDOM"/>
+	<classpathentry kind="lib" path="/home/romain/Documents/Projet_VideoSurveillance/Application_Mobile_Capture/librairie/JDOM/jdom-2.0.5.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
