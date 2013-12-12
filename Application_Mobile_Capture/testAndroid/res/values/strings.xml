@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">testAndroid</string>
     <string name="action_settings">Settings</string>
-     <string name="bouton_Retour">Retour</string>
-     
+    <string name="bouton_Retour">Retour</string>
     <string name="bouton_demarrer">Démarrer</string>
     <string name="bouton_configuration">Configuration</string>
     <string name="bouton_quitter">Quitter</string>
-    
     <string name="bouton_configServeur">Serveur</string>
     <string name="bouton_configCapture">Capture</string>
     <string name="bouton_servEnregistrer">Enregistrer</string>
@@ -17,20 +16,20 @@
     <string name="bouton_generalEnregistrer">Enregistrer</string>
     <string name="bouton_modeEnregistrer">Enregistrer</string>
     <string name="bouton_planifEnregistrer">Enregistrer</string>
-    
     <string name="txtview_serveurActivity">- Informations du serveur - </string>
     <string name="txtview_adrIPServeur">Adresse IP : </string>
     <string name="txtview_portServeur">Port : </string>
     <string name="txtview_generalTypCapture">Type de capture : </string>
     <string name="txtview_modeTypeMode">Type de mode :</string>
     <string name="txtview_planificationTitre">Planification</string>
-    
-     <string name="chkbox_planificationBool">Activé</string>
-    
-    
+    <string name="chkbox_planificationBool">Activé</string>
     <string name="edt_adrIPServeur"></string>
     <string name="edt_portServeur"></string>
-    
     <string name="hint_edt_AdrIPServeur">Adresse ip du serveur</string>
     <string name="hint_edt_portServeur">Port du serveur</string>
+    <string name="title_activity_camera_test">CameraTest</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_camera">CameraActivity</string>
+    <string name="title_activity_camera_moteur">CameraMoteurActivity</string>
+
 </resources>
