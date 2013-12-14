@@ -52,16 +52,19 @@ public class CameraRunActivity extends Activity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				//Coder la prise de photo.
-				captureur.fermer();
-				retour();
+				onBackPressed();
 				
 				
 			}
 		});
 	}
 	
-	public void retour() {
+	public void onBackPressed() {
+		this.captureur.StopperCapture();
 		super.onBackPressed();
 	}
+	
+	
+	
 
 }
