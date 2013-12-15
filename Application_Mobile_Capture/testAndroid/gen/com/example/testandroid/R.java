@@ -27,37 +27,8 @@ public final class R {
         public static final int ic_launcher=0x7f020003;
     }
     public static final class id {
-<<<<<<< HEAD
-        public static final int action_settings=0x7f08001a;
-        public static final int btn_captureGeneral=0x7f080000;
-        public static final int btn_captureMode=0x7f080001;
-        public static final int btn_capturePlanif=0x7f080002;
-        public static final int btn_captureRetour=0x7f080003;
-        public static final int btn_config=0x7f08000b;
-        public static final int btn_configCapture=0x7f080005;
-        public static final int btn_configRetour=0x7f080006;
-        public static final int btn_configServeur=0x7f080004;
-        public static final int btn_demarrer=0x7f08000a;
-        public static final int btn_generalEnregistrer=0x7f080008;
-        public static final int btn_generalRetour=0x7f080009;
-        public static final int btn_modeEnregistrer=0x7f08000e;
-        public static final int btn_modeRetour=0x7f08000f;
-        public static final int btn_planifEnregistrer=0x7f080014;
-        public static final int btn_plannifRetour=0x7f080015;
-        public static final int btn_quitter=0x7f08000c;
-        public static final int btn_servEnregistrer=0x7f080018;
-        public static final int btn_servRetour=0x7f080019;
-        public static final int edt_adrIP=0x7f080016;
-        public static final int edt_portServeur=0x7f080017;
-        public static final int lstview_generalTypCap=0x7f080007;
-        public static final int lstview_modeTypeMode=0x7f08000d;
-        public static final int spnr_planifHeureDebut=0x7f080010;
-        public static final int spnr_planifHeureFin=0x7f080012;
-        public static final int spnr_planifMinDebut=0x7f080011;
-        public static final int spnr_planifMinFin=0x7f080013;
-=======
         public static final int BoutonPrisePhoto=0x7f080002;
-        public static final int action_settings=0x7f08001a;
+        public static final int action_settings=0x7f08001d;
         public static final int btn_captureGeneral=0x7f080003;
         public static final int btn_captureMode=0x7f080004;
         public static final int btn_capturePlanif=0x7f080005;
@@ -71,19 +42,21 @@ public final class R {
         public static final int btn_generalRetour=0x7f08000c;
         public static final int btn_modeEnregistrer=0x7f080011;
         public static final int btn_modeRetour=0x7f080012;
-        public static final int btn_planifEnregistrer=0x7f080015;
+        public static final int btn_planifEnregistrer=0x7f080017;
+        public static final int btn_plannifRetour=0x7f080018;
         public static final int btn_quitter=0x7f08000f;
-        public static final int btn_servEnregistrer=0x7f080018;
-        public static final int btn_servRetour=0x7f080019;
-        public static final int chkbox_planificationBool=0x7f080013;
-        public static final int edt_adrIP=0x7f080016;
-        public static final int edt_portServeur=0x7f080017;
+        public static final int btn_servEnregistrer=0x7f08001b;
+        public static final int btn_servRetour=0x7f08001c;
+        public static final int edt_adrIP=0x7f080019;
+        public static final int edt_portServeur=0x7f08001a;
         public static final int imageAffiche=0x7f080001;
         public static final int lstview_generalTypCap=0x7f08000a;
         public static final int lstview_modeTypeMode=0x7f080010;
-        public static final int lstview_planifHeureDebut=0x7f080014;
+        public static final int spnr_planifHeureDebut=0x7f080013;
+        public static final int spnr_planifHeureFin=0x7f080015;
+        public static final int spnr_planifMinDebut=0x7f080014;
+        public static final int spnr_planifMinFin=0x7f080016;
         public static final int textView1=0x7f080000;
->>>>>>> 1d284fd113d9c063e67641bc7ed8bd1cc44bc5f2
     }
     public static final class layout {
         public static final int activity_camera_run=0x7f030000;
@@ -117,24 +90,17 @@ public final class R {
         public static final int bouton_planifEnregistrer=0x7f05000e;
         public static final int bouton_quitter=0x7f050005;
         public static final int bouton_servEnregistrer=0x7f050008;
-<<<<<<< HEAD
-        public static final int edt_adrIPServeur=0x7f050017;
-        public static final int edt_portServeur=0x7f050018;
-        public static final int hint_edt_AdrIPServeur=0x7f050019;
-        public static final int hint_edt_portServeur=0x7f05001a;
+        public static final int chkbox_planificationBool=0x7f050017;
+        public static final int edt_adrIPServeur=0x7f050018;
+        public static final int edt_portServeur=0x7f050019;
+        public static final int hello_world=0x7f05001d;
+        public static final int hint_edt_AdrIPServeur=0x7f05001a;
+        public static final int hint_edt_portServeur=0x7f05001b;
         public static final int spinner_HeureDeb=0x7f050015;
         public static final int spinner_HeureFin=0x7f050016;
-=======
-        public static final int chkbox_planificationBool=0x7f050015;
-        public static final int edt_adrIPServeur=0x7f050016;
-        public static final int edt_portServeur=0x7f050017;
-        public static final int hello_world=0x7f05001b;
-        public static final int hint_edt_AdrIPServeur=0x7f050018;
-        public static final int hint_edt_portServeur=0x7f050019;
-        public static final int title_activity_camera=0x7f05001c;
-        public static final int title_activity_camera_moteur=0x7f05001d;
-        public static final int title_activity_camera_test=0x7f05001a;
->>>>>>> 1d284fd113d9c063e67641bc7ed8bd1cc44bc5f2
+        public static final int title_activity_camera=0x7f05001e;
+        public static final int title_activity_camera_moteur=0x7f05001f;
+        public static final int title_activity_camera_test=0x7f05001c;
         public static final int txtview_adrIPServeur=0x7f050010;
         public static final int txtview_generalTypCapture=0x7f050012;
         public static final int txtview_modeTypeMode=0x7f050013;

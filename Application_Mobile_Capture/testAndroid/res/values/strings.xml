@@ -16,28 +16,20 @@
     <string name="bouton_generalEnregistrer">Enregistrer</string>
     <string name="bouton_modeEnregistrer">Enregistrer</string>
     <string name="bouton_planifEnregistrer">Enregistrer</string>
-<<<<<<< HEAD
-    
-    <string name="txtview_serveurActivity">Informations du serveur</string>
-=======
+
     <string name="txtview_serveurActivity">- Informations du serveur - </string>
->>>>>>> 1d284fd113d9c063e67641bc7ed8bd1cc44bc5f2
     <string name="txtview_adrIPServeur">Adresse IP : </string>
     <string name="txtview_portServeur">Port : </string>
     <string name="txtview_generalTypCapture">Type de capture</string>
     <string name="txtview_modeTypeMode">Type de mode</string>
     <string name="txtview_planificationTitre">Planification</string>
-<<<<<<< HEAD
     
     <string name="spinner_HeureDeb">Heure de début</string>
     <string name="spinner_HeureFin">Heure de fin</string>
     
-
+   
     
-    
-=======
     <string name="chkbox_planificationBool">Activé</string>
->>>>>>> 1d284fd113d9c063e67641bc7ed8bd1cc44bc5f2
     <string name="edt_adrIPServeur"></string>
     <string name="edt_portServeur"></string>
     <string name="hint_edt_AdrIPServeur">Adresse ip du serveur</string>
