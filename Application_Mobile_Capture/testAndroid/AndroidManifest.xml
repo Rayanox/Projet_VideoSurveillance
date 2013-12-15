@@ -7,7 +7,12 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
-
+    
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -22,28 +27,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.example.avds.ConfigurationActivity">
+        <activity android:name="com.example.avds.Vue.Configuration.ConfigurationActivity" >
         </activity>
-         <activity
-            android:name="com.example.avds.CameraActivity">
+        <activity android:name="com.example.avds.Vue.Configuration.CaptureActivity" >
         </activity>
-         <activity
-            android:name="com.example.avds.CaptureActivity">
+        <activity android:name="com.example.avds.Vue.Configuration.ModeActivity.avds.ModeActivity" >
         </activity>
-         <activity
-            android:name="com.example.avds.GeneralActivity">
+        <activity android:name="com.example.avds.Vue.Configuration.PlanificationActivity" >
         </activity>
-         <activity
-            android:name="com.example.avds.ModeActivity">
+        <activity android:name="com.example.avds.Vue.Configuration.ServerActivity" >
         </activity>
-         <activity
-            android:name="com.example.avds.PlanificationActivity">
+        <activity android:name="com.example.avds.Vue.Capture.CameraRunActivity" 
+            android:parentActivityName="@string/app_name">
         </activity>
-         <activity
-            android:name="com.example.avds.ServerActivity">
-        </activity>
+        
     </application>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.INTERNET"/>	
+
+    
+
 </manifest>

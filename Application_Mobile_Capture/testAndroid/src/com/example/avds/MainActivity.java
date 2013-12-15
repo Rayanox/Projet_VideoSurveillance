@@ -6,6 +6,11 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import com.example.avds.Modele.Envoyeur;
+import com.example.avds.Vue.Capture.CameraRunActivity;
+import com.example.avds.Vue.Configuration.CaptureActivity;
+import com.example.avds.Vue.Configuration.ConfigurationActivity;
+import com.example.avds.Vue.Configuration.GeneralActivity;
 import com.example.testandroid.R;
 
 import android.annotation.SuppressLint;
@@ -22,6 +27,12 @@ import android.view.View.OnClickListener;
 @SuppressLint("NewApi")
 public class MainActivity extends Activity {
 	
+	// A faire :
+	// - Adapter les tailles des composants à tous les téléphones.
+	// - Faire les liaisons entre les récupérations de la config et les parametres globaux
+	// - Ajouter un fichier de config ou seront stoquées les configurations de l'appli (avec un méthode exists() qui vérifiera si le fichier existe bien, sinon, on ne peut pas run la capture)
+	// - Ajouter une capture par vraie vidéo.
+	// - Désallouer tous les éléments à la fin
 	
 	public static final String IP = "192.168.3.84"; //Mettre l'IP du serveur (ne surtout pas mettre 127.0.0.1 car c'est le localhost de la machine virtuel qui est diff�rent de celui du pc)
 	public static final int PORT = 2000;
@@ -45,6 +56,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		System.out.println("OHEEEEEE");
+		
 		final Button configButton = (Button) findViewById(R.id.btn_config);
 		configButton.setOnClickListener(new OnClickListener() {
 					
@@ -65,35 +78,38 @@ public class MainActivity extends Activity {
 		});
 		  
 		  final Button CaptureButton = (Button) findViewById(R.id.btn_demarrer);
-		  CaptureButton.setOnClickListener(new OnClickListener() {
-					
-		  @Override
-		  public void onClick(View v) {  			  
-			  try {
-					envoyeur = new Envoyeur(InetAddress.getByName(IP), PORT);
-
-					StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-
-					StrictMode.setThreadPolicy(policy);
-
-					try {
-						envoyeur.seConnecterAuServeur();
-						envoyeur.envoyerFile();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
+		  CaptureButton.setOnClickListener(new OnClickListener() {					
+			  @Override
+			  public void onClick(View v) {  			  
+				  
+						//envoyeur = new Envoyeur(InetAddress.getByName(IP), PORT);
+	
+						StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+	
+						StrictMode.setThreadPolicy(policy);
 						
-						e.printStackTrace();
-						System.out.println("Connection �chou�e");
-					}
+						Intent intent = new Intent(getThis(), CameraRunActivity.class);
+							startActivity(intent);
+							
+						try {
+							//envoyeur.seConnecterAuServeur();
+							//envoyeur.envoyerFile();
+							
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							
+							e.printStackTrace();
+							System.out.println("Connection �chou�e");
+						}
+						
+						// envoyeur.close(); faits par le receveur
+						// receveur.close();
+	
 					
-					// envoyeur.close(); faits par le receveur
-					// receveur.close();
-
-				} catch (UnknownHostException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		  }
+			  }
 		});  
+	}
+	public MainActivity getThis() {
+		return this;
 	}
 }
