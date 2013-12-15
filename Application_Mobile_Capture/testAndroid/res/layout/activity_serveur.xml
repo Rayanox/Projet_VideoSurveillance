@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#33CCFF"
+    android:background="@drawable/gradientbackground"
     tools:context=".MainActivity" >
 	
      <TextView
@@ -63,25 +63,28 @@
     
     <Button
         android:id="@+id/btn_servEnregistrer"
-        android:layout_width="213dp"
+        android:layout_width="218dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:background="#3366FF"
+        android:background="@drawable/buttonsdesign"
         android:gravity="center"
         android:text="@string/bouton_servEnregistrer"
         android:textColor="#FFFFFF"
-        android:textSize="35sp" />
+        android:textSize="25sp"
+        android:typeface="monospace" />
     
      <Button
         android:id="@+id/btn_servRetour"
-        android:layout_width="213dp"
+        android:layout_width="218dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:background="#3366FF"
+        android:background="@drawable/buttonsdesign"
         android:gravity="center"
         android:text="@string/bouton_Retour"
         android:textColor="#FFFFFF"
-        android:textSize="35sp" />
+        android:textSize="25sp" 
+        android:typeface="monospace" />
+     
 </LinearLayout>

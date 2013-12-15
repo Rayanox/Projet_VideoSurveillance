@@ -18,14 +18,17 @@
     <string name="bouton_modeEnregistrer">Enregistrer</string>
     <string name="bouton_planifEnregistrer">Enregistrer</string>
     
-    <string name="txtview_serveurActivity">- Informations du serveur - </string>
+    <string name="txtview_serveurActivity">Informations du serveur</string>
     <string name="txtview_adrIPServeur">Adresse IP : </string>
     <string name="txtview_portServeur">Port : </string>
-    <string name="txtview_generalTypCapture">Type de capture : </string>
-    <string name="txtview_modeTypeMode">Type de mode :</string>
+    <string name="txtview_generalTypCapture">Type de capture</string>
+    <string name="txtview_modeTypeMode">Type de mode</string>
     <string name="txtview_planificationTitre">Planification</string>
     
-     <string name="chkbox_planificationBool">Activé</string>
+    <string name="spinner_HeureDeb">Heure de début</string>
+    <string name="spinner_HeureFin">Heure de fin</string>
+    
+
     
     
     <string name="edt_adrIPServeur"></string>
