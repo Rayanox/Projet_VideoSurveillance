@@ -1,5 +1,13 @@
 package com.example.avds.Vue.Configuration;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.Inet4Address;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,19 +15,32 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.avds.MainActivity;
+import com.example.avds.Modele.Module_Arborescence_Fichier;
 import com.example.testandroid.R;
 
 public class ServerActivity extends Activity {
-	TextView textView; 
+	private Button servRetourButton;
+	private Button servEnregistrerButton;
+	private EditText ChampsIP;
+	private EditText ChampsPortTCP;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		textView = new TextView(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_serveur);
 		
-		final Button servRetourButton = (Button) findViewById(R.id.btn_servRetour);
-		servRetourButton.setOnClickListener(new OnClickListener() {
+		this.ChampsIP = (EditText) findViewById(R.id.edt_adrIP);		
+		this.ChampsPortTCP = (EditText) findViewById(R.id.edt_portServeur);
+		
+		// Remplissage des valeurs par défaut si elles existent déjà (A executé obligatoirement après l'initialisation des variables de champs)
+		this.MettreTexteParDefautDansChamps();
+		
+		this.servRetourButton = (Button) findViewById(R.id.btn_servRetour);
+		this.servRetourButton.setOnClickListener(new OnClickListener() {
 						
 			@Override
 			public void onClick(View v) {
@@ -28,28 +49,167 @@ public class ServerActivity extends Activity {
 			});
 		
 		//Récupération de l'adresse ip et port du serveur
-		final Button servEnregistrerButton = (Button) findViewById(R.id.btn_servEnregistrer);
-		servEnregistrerButton.setOnClickListener(new OnClickListener() {
+		this.servEnregistrerButton = (Button) findViewById(R.id.btn_servEnregistrer);
+		this.servEnregistrerButton.setOnClickListener(new OnClickListener() {
 						
 			@Override
 			public void onClick(View v) {
-				EditText  edt_AdrIP = (EditText) findViewById(R.id.edt_adrIP);
-				String adrIP = edt_AdrIP.getText().toString();
-				textView.setText(adrIP);
-				setContentView(textView);
-			  }
-			});
-		servEnregistrerButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				EditText  edt_portServeur = (EditText) findViewById(R.id.edt_portServeur);
-				String portServeur = edt_portServeur.getText().toString();
-			  }
-			});
-		
-		
-;
+				//Récupération des valeurs
+				String adrIP = ChampsIP.getText().toString();
+				String portServeur = ChampsPortTCP.getText().toString();
+				String port_UDP = "2001"; //TODO laissé par défaut car ilmanque un champs
+				
+				//Lancement du remplissage du fichier de config
+				configurerFichierConfig(adrIP, portServeur, port_UDP);
+			}
+			});	
+	
 	}
 
+	//Dans cette méthode a été introduit un pattern de sortie de méthode à tout instant d'échec. La fin de la méthode est donc obligatoirement une réussite
+	private void configurerFichierConfig(String ip, String port_tcp, String port_udp) {
+		File fichierConfig = new File(MainActivity.PATH_FICHIER_CONFIG);
+		
+		if(!fichierConfig.exists() || fichierConfig.isDirectory()) {			
+			fichierConfig.mkdirs();			
+			try {
+				if(fichierConfig.exists()) fichierConfig.delete();
+				fichierConfig.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+				this.AfficherToast("Probleme inconnu survenu");
+				return;
+			}
+					
+		} else {
+			//--- Cas ou le fichier de config est déjà créé
+			
+			// on vérifie la validité des informations
+			int p_tcp, p_udp;
+			try {
+				p_tcp = Integer.parseInt(port_tcp);
+				p_udp = Integer.parseInt(port_udp);
+				Inet4Address.getByName(ip);
+				if(p_tcp < 1 || p_tcp > 65000) throw new Exception("Port inférieur à 0 ou supérieur à 65000");
+				if(p_udp < 1 || p_udp >65000) throw new Exception("Port inférieur à 0 ou supérieur à 65000");				
+			} catch(Exception e) {
+				this.AfficherToast("Paramètres de configuration invalides : modifier les parametres incorrectes");
+				return;
+			}
+				
+			
+			
+			
+			//--- Si on arrive ici, c'est que les parametres sont bien valides et que le fichier de conf est créé, on peut alors commencer l'insertion dans le fichier
+			
+			FileWriter writer;
+			try {
+				writer = new FileWriter(fichierConfig);
+				writer.write(ip+"\n");
+				writer.write(p_tcp+"\n");
+				writer.write(p_udp+"\n");
+				writer.flush();
+				writer.close();
+			} catch (IOException e) {
+				this.AfficherToast("Probleme lors de l'écriture dans le fichier");
+				e.printStackTrace();
+				return;
+			}
+			
+			this.AfficherToast("Enregistrement réussi !");
+			this.finish();
+			
+			//test lecture fichier
+			/*BufferedReader reader;
+			try {
+				reader = new BufferedReader(new FileReader(fichierConfig));
+				String affichage ="";
+				while((affichage = reader.readLine()) != null) System.out.println("ligne = "+affichage);
+				reader.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}*/
+			
+		}		
+		
+	}
+	
+	// Met un texte par défaut dans les champs. Le texte correspond à la valeur dans le fichier de config. Si celui-ci n'est pas valide, alors on laisse les valeurs par défaut comme elles étaient déjà.
+	private void MettreTexteParDefautDansChamps() {
+		File fichierConfig = new File(MainActivity.PATH_FICHIER_CONFIG);
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(fichierConfig));
+			String ip ="", port_TCP = "", port_UDP = "";
+			
+				
+				for(int i = 0; i<3; i++) {
+					String var;
+					try {
+						var = reader.readLine();
+						
+						if(var == null) { // Si une des lignes est manquantes, c'est que le fichier n'est pas correct
+							return;
+						}
+						
+						switch(i) {
+						case 0 :
+							ip = var;
+							break;
+						case 1 :
+							port_TCP = var;
+							break;
+						case 2:
+							port_UDP = var;						
+							break;
+						default :
+							System.out.println("Probleme de code");
+							return;
+						}
+					} catch (IOException e) {
+						this.AfficherToast("Erreur lors de la lecture du buffer du fichier de config");
+						return;
+					}
+					
+					
+				}
+				
+				//fermeture du buffer
+				try {
+					reader.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				// --- Verification des valeurs
+				if(this.verificationValidite(ip, port_TCP, port_UDP)) {
+					this.ChampsIP.setText(ip);
+					this.ChampsPortTCP.setText(port_TCP);
+				}
+				
+				
+		} catch (FileNotFoundException e) {
+			this.AfficherToast("Erreur lors de la lecture du fichier config pour valeurs par défaut");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private boolean verificationValidite(String ip, String port_tcp, String port_udp) {
+		int p_tcp, p_udp;
+		try {
+			p_tcp = Integer.parseInt(port_tcp);
+			p_udp = Integer.parseInt(port_udp);
+			Inet4Address.getByName(ip);
+			if(p_tcp < 1 || p_tcp > 65000) throw new Exception("Port inférieur à 0 ou supérieur à 65000");
+			if(p_udp < 1 || p_udp >65000) throw new Exception("Port inférieur à 0 ou supérieur à 65000");				
+		} catch(Exception e) {
+			return false;
+		}
+		return true;
+	}
+	
+	private void AfficherToast(final String texte) {
+		Toast.makeText(this, texte, Toast.LENGTH_LONG).show();		
+	}
 }

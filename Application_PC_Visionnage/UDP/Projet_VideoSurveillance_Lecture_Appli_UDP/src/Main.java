@@ -16,7 +16,7 @@ public class Main {
 	//TODO Ajouter syst�me d'authentification par ip (UDP) lors de la r�c�ption de chaque requete, ou rechercher une autre solution. [OK]
 	//TODO R�gler bug lors de 3 clients sur m�me poste... [OK] => fixed with a sleep, threadlecture accedait � la liste alors que l'objet n'�tait pas encore initialis� totalement.
 	//TODO Faire syst�me de une fenetre avec un panel par connexion [OK]
-	//TODO Mettre en place github
+	//TODO Mettre en place github [OK]
 	//TODO G�rer les d�connections
 	//TODO G�rer tous les closes 
 	//TODO Rajouter des trucs graphiques (TRES OPTIONNEL)
@@ -32,10 +32,13 @@ public class Main {
 	public static final int NombreMaxConnections = 5;
 	public static final long nbMilliSecondesLatence = 1500; // temps de pause � chaque ajout d'image.
 	
-	public static final boolean MultiClientSurMemeOrdi = true; // mettre � true si plusieurs clients peuvent �tre connect�s sur le m�me
+	public static final boolean MultiClientSurMemeOrdi = false; // mettre � true si plusieurs clients peuvent �tre connect�s sur le m�me
 															   // ordinateur, cependant, les performances peuvent �tre tr�s
 															   // ralenties car l'algorithme parcourt syst�matiquement 
-															   // toute la liste de clients. En prod, la valeur doit �tre � FALSE.
+															   // toute la liste de clients.-> utile uniquement en phase de tests avec 
+															   // des clients mocks sur le meme ordi
+															   // Ceci est dû à la reconnaissance par IP des clients, on ne peut pas distinguer deux clients sur un meme pc
+															   // En prod, la valeur doit �tre � FALSE.
 	
 	
 	public static void main(String[] args) {
@@ -54,6 +57,7 @@ public class Main {
 				// Attente de connexion ...               ( � cause de SocketServeur.accept() ) 				
 				try {
 					Socket s = SocketServeur.accept();
+					
 					threadLecture.sleep(Main.nbMilliSecondesLatence);
 					listeDeConnexions.add(new Connexion(SocketServeur, s,threadLecture, fenetre)); 
 				} catch (Exception e) {

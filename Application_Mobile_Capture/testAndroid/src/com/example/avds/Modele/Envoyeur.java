@@ -22,18 +22,22 @@ import com.example.avds.MainActivity;
 
 public class Envoyeur {
 
+	// La solution de connection utilisée est à la fois du TCP/IP et de l'UDP. 
+	// La procédure est la suivante :
+	// On effectue tout d'abord une connection en TCP/IP pour être sur que les deux appareils
+	// soient connectés. Puis les échanges sont effectués en UDP pour une rapidité optimale
+	// et parce qu'en vidéo (ou pseudo-vidéo), la perte d'image est peu importante. 
+	
 	private DatagramSocket socket;
 	private Socket socketConnection;
 	private InetAddress IP;
 	private int port;
-	private FileInputStream bufferLectureFichier1;
-	private FileInputStream bufferLectureFichier2;
-	private File fichier;
-	private File fichier2;
+	private boolean envoyeurDispo; //variable utile pour locker la classe (du moins la méthode d'envoie)  pendant l'envoie d'une image. C'est une sécurité.
 
 	public Envoyeur(InetAddress ip, int port) {
 		this.IP = ip;
 		this.port = port;
+		this.envoyeurDispo = true;
 		
 		try {
 			this.socket = new DatagramSocket();
@@ -42,100 +46,53 @@ public class Envoyeur {
 			e1.printStackTrace();
 		}
 		
-		this.fichier = new File(MainActivity.PATH_FILE_IN1);
-		this.fichier2 = new File(MainActivity.PATH_FILE_IN2);
 		
-		try {
-
-			this.bufferLectureFichier1 = new FileInputStream(fichier);
-			this.bufferLectureFichier2 = new FileInputStream(fichier2);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		
 		
 	}
 	
 	public void seConnecterAuServeur() throws IOException {
-		this.socketConnection = new Socket(this.IP, this.port);
-		System.out.println("Connection r�ussie");
+		try {
+			this.socketConnection = new Socket(this.IP, this.port);
+			System.out.println("Connection r�ussie");
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Connexion échouée !");
+			throw e;
+		}
 	}
 
-	public void envoyerFile() {
-		byte[] b = new byte[MainActivity.bufferSize];
-		int i = 0;
-		boolean fichier1Tour = true;
-		System.out.println("(envoyeur) : envoie de fichier ...");
-		int compteur = 0;
+	public boolean getEnvoyeurDispo() {
+		return this.envoyeurDispo;
+	}
+	
+	public void envoyerDonnees(byte[] datas) {	
 		
-		while(true) {
 			try {
-
-				if(fichier1Tour) {
-					i = this.bufferLectureFichier1.read(b);
-					DatagramPacket packetEnvoie = new DatagramPacket(b, b.length, InetAddress.getByName(MainActivity.IP), MainActivity.PORT_UDP);
-					this.socket.send(packetEnvoie);					
-					b = new byte[MainActivity.bufferSize];
-					this.bufferLectureFichier1 = new FileInputStream(this.fichier);
-					
-				} else {
-					i = this.bufferLectureFichier2.read(b);
-					DatagramPacket packetEnvoie = new DatagramPacket(b, b.length, InetAddress.getByName(MainActivity.IP), MainActivity.PORT_UDP);
-					this.socket.send(packetEnvoie);					
-					b = new byte[MainActivity.bufferSize];
-					this.bufferLectureFichier2 = new FileInputStream(fichier2);
-				}
-				
-				
+				this.envoyeurDispo = false;
+				DatagramPacket packetEnvoie = new DatagramPacket(datas, datas.length, InetAddress.getByName(MainActivity.IP), MainActivity.PORT_UDP);
+				this.socket.send(packetEnvoie);			
 			
-
+				System.out.println("(envoyeur) : envoie de fichier réussie ");
 				
-				
-			
-				System.out.println("(envoyeur) : envoie de fichier r�ussie "+compteur++);
-				b = new byte[MainActivity.bufferSize];
-				fichier1Tour = !fichier1Tour;
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				System.out.println("(envoyeur) : envoie de fichier �chou�");
+				System.out.println("(envoyeur) : envoie de fichier échoué");
 			}
-		}
+			
+			this.envoyeurDispo =  true;
 		
-
-		//this.close();
 	}
 
-	/*
-	 * public void envoyerFile2() { byte t[] = new byte[1024]; int n; try {
-	 * while((n = this.bufferLectureFichier.read()) != -1) {
-	 * this.bufferEnvoie.println(t); this.bufferEnvoie.flush(); }
-	 * this.bufferEnvoie.println("null"); this.bufferEnvoie.flush(); } catch
-	 * (IOException e) { // TODO Auto-generated catch block e.printStackTrace();
-	 * }
-	 * 
-	 * }
-	 */
+	
 
-	public void close() {
-		try {
-			this.bufferLectureFichier1.close();
-			this.bufferLectureFichier2.close();
-			System.out.println("Fermeture Buffers 1 et 2 r�ussie");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void closeConnexion() {
+		
 		try {
 			this.socket.close();
+			this.socketConnection.close();
 			System.out.println("Fermeture socket r�ussie");
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block

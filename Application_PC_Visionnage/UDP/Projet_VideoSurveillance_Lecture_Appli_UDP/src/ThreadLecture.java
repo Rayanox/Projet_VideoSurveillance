@@ -17,6 +17,7 @@ import java.net.SocketException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.imageio.plugins.bmp.BMPImageWriteParam;
 import javax.imageio.stream.ImageInputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -55,18 +56,22 @@ public class ThreadLecture extends Thread {
 			
 			
 			while (this.lectureActive) {
-				System.out.println("Lecture lancée ...");
+				System.out.println("Lecture lancï¿½e ...");
 			  
 				this.socket.receive(this.paquetRecu);
 				
 				
 				for (Connexion c : this.listThreadConnexion) {
-					//Teste si le paquet reçu correspond à celui d'une des connections de notre liste (test en fonction de l'IP)
+					//Teste si le paquet reï¿½u correspond ï¿½ celui d'une des connections de notre liste (test en fonction de l'IP)
 					if(c.getIPDestinataire().equals(this.paquetRecu.getAddress())) {
 						poidImage = this.paquetRecu.getLength();
 						
 						try {				
+							
+							
 							ImageInputStream imageInputS = ImageIO.createImageInputStream(new ByteArrayInputStream(buffer, 0, poidImage));
+							
+							
 							BufferedImage bu = ImageIO.read(imageInputS);
 							Image image = bu;
 							c.getLabelImage().setIcon(new ImageIcon(image));
@@ -74,19 +79,23 @@ public class ThreadLecture extends Thread {
 							c.getPanel().repaint();
 							SwingUtilities.windowForComponent(c.getPanel()).pack();
 							//this.fenetre.pack(); // TODO A retirer peut etre selon le rendu
-						} catch (IOException e) { 
+						} catch (Exception e) { 
 							e.printStackTrace();
 						}
 						if(!Main.MultiClientSurMemeOrdi) break;
 					}
 				}
+				//On rÃ©initialise le buffer
 				buffer = new byte[Main.bufferSize];
+				
+				
+				
 				this.paquetRecu = new DatagramPacket(buffer, buffer.length);
 				
 				
 				
 			}
-			System.out.println("Lecture stoppée ...");
+			System.out.println("Lecture stoppï¿½e ...");
 
 			
 
@@ -119,6 +128,10 @@ public class ThreadLecture extends Thread {
 
 	public int getNbConnexionsActives() {
 		return this.listThreadConnexion.size();
+	}
+	
+	public void removeConnexionFromList(Connexion c) {
+		this.listThreadConnexion.remove(c);
 	}
 
 }

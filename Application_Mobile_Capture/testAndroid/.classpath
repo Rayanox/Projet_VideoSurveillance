@@ -4,8 +4,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JDOM"/>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="lib" path="/home/rayanox/Dropbox/All/Etudes/CSID/Projets/Mobile/VideoSurveillance/Librairies/JDOM/jdom-2.0.5-sources.jar"/>
 	<classpathentry kind="lib" path="/home/rayanox/Dropbox/All/Etudes/CSID/Projets/Mobile/VideoSurveillance/Librairies/JDOM/jdom-2.0.5-junit.jar"/>
 	<classpathentry kind="lib" path="/home/rayanox/Dropbox/All/Etudes/CSID/Projets/Mobile/VideoSurveillance/Librairies/JDOM/jdom-2.0.5-javadoc.jar"/>
@@ -14,5 +12,7 @@
 	<classpathentry kind="lib" path="/home/rayanox/Dropbox/All/Etudes/CSID/Projets/Mobile/VideoSurveillance/Librairies/JDOM/lib/jaxen-1.1.6.jar"/>
 	<classpathentry kind="lib" path="/home/rayanox/Dropbox/All/Etudes/CSID/Projets/Mobile/VideoSurveillance/Librairies/JDOM/lib/xercesImpl.jar"/>
 	<classpathentry kind="lib" path="/home/rayanox/Dropbox/All/Etudes/CSID/Projets/Mobile/VideoSurveillance/Librairies/JDOM/lib/xml-apis.jar"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
