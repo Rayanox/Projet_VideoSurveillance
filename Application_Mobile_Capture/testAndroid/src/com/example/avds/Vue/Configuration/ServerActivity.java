@@ -26,6 +26,7 @@ public class ServerActivity extends Activity {
 	private Button servEnregistrerButton;
 	private EditText ChampsIP;
 	private EditText ChampsPortTCP;
+	private EditText ChampsPortUDP;
 	
 	
 	@Override
@@ -34,7 +35,8 @@ public class ServerActivity extends Activity {
 		setContentView(R.layout.activity_serveur);
 		
 		this.ChampsIP = (EditText) findViewById(R.id.edt_adrIP);		
-		this.ChampsPortTCP = (EditText) findViewById(R.id.edt_portServeur);
+		this.ChampsPortTCP = (EditText) findViewById(R.id.edt_portServeurTCP);
+		this.ChampsPortUDP = (EditText) findViewById(R.id.edt_portServeurUDP);
 		
 		// Remplissage des valeurs par défaut si elles existent déjà (A executé obligatoirement après l'initialisation des variables de champs)
 		this.MettreTexteParDefautDansChamps();
@@ -56,11 +58,12 @@ public class ServerActivity extends Activity {
 			public void onClick(View v) {
 				//Récupération des valeurs
 				String adrIP = ChampsIP.getText().toString();
-				String portServeur = ChampsPortTCP.getText().toString();
-				String port_UDP = "2001"; //TODO laissé par défaut car ilmanque un champs
+				String portServeurTCP = ChampsPortTCP.getText().toString();
+				String portServeurUDP = ChampsPortUDP.getText().toString();
+				//String port_UDP = "2001"; 
 				
 				//Lancement du remplissage du fichier de config
-				configurerFichierConfig(adrIP, portServeur, port_UDP);
+				configurerFichierConfig(adrIP, portServeurTCP, portServeurUDP);
 			}
 			});	
 	
@@ -93,7 +96,7 @@ public class ServerActivity extends Activity {
 				if(p_tcp < 1 || p_tcp > 65000) throw new Exception("Port inférieur à 0 ou supérieur à 65000");
 				if(p_udp < 1 || p_udp >65000) throw new Exception("Port inférieur à 0 ou supérieur à 65000");				
 			} catch(Exception e) {
-				this.AfficherToast("Paramètres de configuration invalides : modifier les parametres incorrectes");
+				this.AfficherToast("Paramètres de configuration invalides : modifier les paramètres incorrects");
 				return;
 			}
 				
@@ -141,7 +144,6 @@ public class ServerActivity extends Activity {
 			BufferedReader reader = new BufferedReader(new FileReader(fichierConfig));
 			String ip ="", port_TCP = "", port_UDP = "";
 			
-				
 				for(int i = 0; i<3; i++) {
 					String var;
 					try {

@@ -28,7 +28,7 @@ public final class R {
     }
     public static final class id {
         public static final int BoutonPrisePhoto=0x7f080002;
-        public static final int action_settings=0x7f08001d;
+        public static final int action_settings=0x7f08001e;
         public static final int btn_captureGeneral=0x7f080003;
         public static final int btn_captureMode=0x7f080004;
         public static final int btn_capturePlanif=0x7f080005;
@@ -45,10 +45,11 @@ public final class R {
         public static final int btn_planifEnregistrer=0x7f080017;
         public static final int btn_plannifRetour=0x7f080018;
         public static final int btn_quitter=0x7f08000f;
-        public static final int btn_servEnregistrer=0x7f08001b;
-        public static final int btn_servRetour=0x7f08001c;
+        public static final int btn_servEnregistrer=0x7f08001c;
+        public static final int btn_servRetour=0x7f08001d;
         public static final int edt_adrIP=0x7f080019;
-        public static final int edt_portServeur=0x7f08001a;
+        public static final int edt_portServeurTCP=0x7f08001a;
+        public static final int edt_portServeurUDP=0x7f08001b;
         public static final int imageAffiche=0x7f080001;
         public static final int lstview_generalTypCap=0x7f08000a;
         public static final int lstview_modeTypeMode=0x7f080010;
@@ -67,6 +68,7 @@ public final class R {
         public static final int activity_mode=0x7f030005;
         public static final int activity_planification=0x7f030006;
         public static final int activity_serveur=0x7f030007;
+        public static final int activity_splashscreen=0x7f030008;
     }
     public static final class menu {
         public static final int camera=0x7f070000;
@@ -90,23 +92,27 @@ public final class R {
         public static final int bouton_planifEnregistrer=0x7f05000e;
         public static final int bouton_quitter=0x7f050005;
         public static final int bouton_servEnregistrer=0x7f050008;
-        public static final int chkbox_planificationBool=0x7f050017;
-        public static final int edt_adrIPServeur=0x7f050018;
-        public static final int edt_portServeur=0x7f050019;
-        public static final int hello_world=0x7f05001d;
-        public static final int hint_edt_AdrIPServeur=0x7f05001a;
-        public static final int hint_edt_portServeur=0x7f05001b;
-        public static final int spinner_HeureDeb=0x7f050015;
-        public static final int spinner_HeureFin=0x7f050016;
-        public static final int title_activity_camera=0x7f05001e;
-        public static final int title_activity_camera_moteur=0x7f05001f;
-        public static final int title_activity_camera_test=0x7f05001c;
+        public static final int edt_adrIPServeur=0x7f05001a;
+        public static final int edt_portServeurTCP=0x7f05001b;
+        public static final int edt_portServeurUDP=0x7f05001c;
+        public static final int hello_world=0x7f050021;
+        public static final int hint_edt_AdrIPServeur=0x7f05001d;
+        public static final int hint_edt_portServeurTCP=0x7f05001e;
+        public static final int hint_edt_portServeurUDP=0x7f05001f;
+        public static final int spinner_HeureDeb=0x7f050018;
+        public static final int spinner_HeureFin=0x7f050019;
+        public static final int title_activity_camera=0x7f050022;
+        public static final int title_activity_camera_moteur=0x7f050023;
+        public static final int title_activity_camera_test=0x7f050020;
         public static final int txtview_adrIPServeur=0x7f050010;
-        public static final int txtview_generalTypCapture=0x7f050012;
-        public static final int txtview_modeTypeMode=0x7f050013;
-        public static final int txtview_planificationTitre=0x7f050014;
-        public static final int txtview_portServeur=0x7f050011;
+        public static final int txtview_generalTypCapture=0x7f050013;
+        public static final int txtview_modeTypeMode=0x7f050014;
+        public static final int txtview_planificationTitre=0x7f050015;
+        public static final int txtview_portServeurTCP=0x7f050011;
+        public static final int txtview_portServeurUDP=0x7f050012;
         public static final int txtview_serveurActivity=0x7f05000f;
+        public static final int txtview_splashScreenAuthors=0x7f050017;
+        public static final int txtview_splashScreenTitle=0x7f050016;
     }
     public static final class style {
         /** 

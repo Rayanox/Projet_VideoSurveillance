@@ -85,8 +85,6 @@ public class Captureur extends Thread{
 		if(this.camera == null) {
 			this.activiteMere.AfficherToast("Vous n'avez pas de caméra...");			
 		}else {
-			
-			
 			try {
 				//Connexion de l'envoyeur
 				this.envoyeur.seConnecterAuServeur();
@@ -115,11 +113,7 @@ public class Captureur extends Thread{
 			
 		}
 		
-		
-		
-		
 	}
-	
 	
 	//C'est ici que sont initialisés les fonctions utilisées par l'appareil photo : c'est le coeur du traitement de l'image prise en photo
 	private void initCallBack() {
@@ -169,11 +163,6 @@ public class Captureur extends Thread{
 				e.printStackTrace();
 			}*/
 			this.camera.takePicture(null, null, this.FonctionCallBackJPeg);
-			
-			
 		}
-	}
-
-	
-	
+	}	
 }

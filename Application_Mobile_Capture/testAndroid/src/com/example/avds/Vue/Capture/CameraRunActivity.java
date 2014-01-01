@@ -22,8 +22,6 @@ import android.widget.Toast;
 // et ne pas poser de problème de caméra déjà utilisée.
 
 public class CameraRunActivity extends Activity {
-
-	
 	private ImageView image;
 	private Button boutonFinCapture;
 	private Captureur captureur;
