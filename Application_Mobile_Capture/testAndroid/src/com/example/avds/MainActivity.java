@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
 	// - Ajouter une capture par vraie vidéo.
 	// - Vérifier l'utilisation de toutes les Tasks du code (todo )
 	// - Application Lecture : Peut etre passer sur un modele multi-thread  de threadLecture pour un petit plus optimiser sachant qu'il y aura toujours un controller qui recevra les requetes, mais il délèguera le travail du traitement aux threads(pourrait se faire par le run des connexions).
-	
+	// - Modifier la connection en ajoutant une socketStreaming. 
 	
 	//Faits :
 	

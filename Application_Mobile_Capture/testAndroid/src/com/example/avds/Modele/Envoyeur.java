@@ -15,8 +15,12 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.net.SocketException;
+
+import javax.net.SocketFactory;
 
 import com.example.avds.MainActivity;
 
@@ -54,7 +58,8 @@ public class Envoyeur {
 	
 	public void seConnecterAuServeur() throws IOException {
 		try {
-			this.socketConnection = new Socket(this.IP, this.port);
+			this.socketConnection = new Socket();
+			this.socketConnection.connect(new InetSocketAddress(this.IP, this.port), 6000); // 6000 est la valeur du timeout, ça correspond à 6 secondes et c'est raisonnable. Par défaut, on devait attendre plusieurs minutes, ce qui était très embettant
 			System.out.println("Connection r�ussie");
 		} catch (IOException e) {
 			e.printStackTrace();
