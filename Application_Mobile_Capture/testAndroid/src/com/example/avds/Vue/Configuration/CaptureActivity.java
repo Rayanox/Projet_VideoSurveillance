@@ -27,6 +27,9 @@ public class CaptureActivity extends Activity {
 			}
 		});	
         
+        //on cache ce bouton car les options proposées par ce menu ne sont pas encore gérées (video)
+        captureGeneral.setVisibility(View.GONE);
+        
         final Button captureMode = (Button) findViewById(R.id.btn_captureMode);
         captureMode.setOnClickListener(new OnClickListener() {
 						

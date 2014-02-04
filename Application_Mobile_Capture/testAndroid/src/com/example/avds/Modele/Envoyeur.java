@@ -42,7 +42,9 @@ public class Envoyeur {
 	private InetAddress IP;
 	private int port;
 	private boolean envoyeurDispo; //variable utile pour locker la classe (du moins la méthode d'envoie)  pendant l'envoie d'une image. C'est une sécurité.
-
+	private byte ID_Connexion; // id envoy� par le serveur
+	
+	
 	public Envoyeur(InetAddress ip, int port) {
 		this.IP = ip;
 		this.port = port;
@@ -66,6 +68,14 @@ public class Envoyeur {
 			this.socketConnection = new Socket();
 			this.socketConnection.connect(new InetSocketAddress(this.IP, this.port), 6000); // 6000 est la valeur du timeout, ça correspond à 6 secondes et c'est raisonnable. Par défaut, on devait attendre plusieurs minutes, ce qui était très embettant
 			System.out.println("Connection r�ussie");
+			
+			BufferedInputStream reader= new BufferedInputStream(this.socketConnection.getInputStream());
+			
+			byte [] datasReceptionID = new byte[10];
+			reader.read(datasReceptionID,0,1);
+			this.ID_Connexion = datasReceptionID[0];
+			System.out.println("ID de la connexion bien re�u = "+ID_Connexion);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Connexion échouée !");
@@ -87,7 +97,10 @@ public class Envoyeur {
 	      System.out.println("");
 			try {
 				this.envoyeurDispo = false;
-				DatagramPacket packetEnvoie = new DatagramPacket(datas, datas.length, InetAddress.getByName(MainActivity.IP), MainActivity.PORT_UDP);
+				byte [] datasEtID = new byte [datas.length+1];
+				
+				remplir(datasEtID, datas);
+				DatagramPacket packetEnvoie = new DatagramPacket(datasEtID, datasEtID.length, InetAddress.getByName(MainActivity.IP), MainActivity.PORT_UDP);
 				this.socket.send(packetEnvoie);			
 			
 				System.out.println("(envoyeur) : envoie de fichier réussie ");
@@ -103,6 +116,14 @@ public class Envoyeur {
 	}
 
 	
+
+	private void remplir(byte[] datasEtID, byte[] datas) {
+		// TODO Auto-generated method stub
+		datasEtID[0] = this.ID_Connexion;
+		for(int i = 0; i<datas.length;i++) {
+			datasEtID[i+1] = datas[i];
+		}
+	}
 
 	public void closeConnexion() {
 		

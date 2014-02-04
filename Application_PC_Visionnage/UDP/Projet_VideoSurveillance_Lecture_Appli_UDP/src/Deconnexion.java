@@ -21,7 +21,7 @@ public class Deconnexion extends Thread{
 		} catch (IOException e) {
 			
 		}
-		System.out.println("Deconnexion ...");
+		System.out.println("Deconnexion de ID n°"+this.connexion.getID_Connexion()+" ...");
 		connexion.closeConnexion();
 	}
 	

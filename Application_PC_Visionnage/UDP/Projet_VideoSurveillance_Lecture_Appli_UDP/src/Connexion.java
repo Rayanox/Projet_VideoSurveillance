@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 public class Connexion extends Thread{
 
 	
-	private static int numero = 1; 
+	private byte ID_connexion = 1; 
 	
 	private Socket socket;
 	private ServerSocket serveurSocket;
@@ -22,7 +22,7 @@ public class Connexion extends Thread{
 	private JLabel labelImage;
 	private Deconnexion deconnexionListenner;
 	
-	public Connexion(ServerSocket serveurSoc, Socket s, ThreadLecture t, Fenetre f) {
+	public Connexion(ServerSocket serveurSoc, Socket s, ThreadLecture t, Fenetre f, byte id_connexion) {
 		
 		this.panel = new JPanel();
 		this.serveurSocket = serveurSoc;
@@ -33,6 +33,7 @@ public class Connexion extends Thread{
 		this.panel.add(this.labelImage);
 		this.fenetre.getPanel().add(this.panel);
 		this.IPDestinataire = s.getInetAddress();// par sur que cela retourne l'ip de la machine distante...
+		this.ID_connexion = id_connexion;
 		this.updateLayoutFenetre();
 		this.threadDeLecture.activerLecture();
 		this.deconnexionListenner = new Deconnexion(this);
@@ -44,6 +45,10 @@ public class Connexion extends Thread{
 	
 		
 		
+	}
+	
+	public byte getID_Connexion() {
+		return this.ID_connexion;
 	}
 	
 	public Socket getSocketTransition() {

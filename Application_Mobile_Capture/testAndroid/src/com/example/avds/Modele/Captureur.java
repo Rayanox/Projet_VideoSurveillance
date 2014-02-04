@@ -62,27 +62,33 @@ public class Captureur extends Thread{
 		
 		
 		this.camera = Camera.open();
-		ArrayList<Size> listSizes = (ArrayList<Camera.Size>) this.camera.getParameters().getSupportedPictureSizes();
-		for (Size mode : listSizes) {
-			System.out.println("Affichage : height = "+mode.height+" width = "+mode.width);
-		}
-		this.widthCapture = listSizes.get(0).width;
-		this.heightCapture = listSizes.get(0).height;
-		this.camera.release();
-		
-		//on initialise les fonctions utilisées lors de la prise de la photo			
-		this.initCallBack();
-		
-		//initialisation de l'envoyeur
-		try {
-			this.envoyeur = new Envoyeur(Inet4Address.getByName(MainActivity.IP), MainActivity.PORT);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(this.camera == null) {
 			if(this.activiteMere != null)
-			this.activiteMere.AfficherToast("Problème de configuration d'IP : Revoir les configurations");
-			//activiteMere.onBackPressed();
+			this.activiteMere.AfficherToast("Vous n'avez pas de caméra...");	
+		}else {
+			ArrayList<Size> listSizes = (ArrayList<Camera.Size>) this.camera.getParameters().getSupportedPictureSizes();
+			for (Size mode : listSizes) {
+				System.out.println("Affichage : height = "+mode.height+" width = "+mode.width);
+			}
+			this.widthCapture = listSizes.get(0).width;
+			this.heightCapture = listSizes.get(0).height;
+			this.camera.release();
+			
+			//on initialise les fonctions utilisées lors de la prise de la photo			
+			this.initCallBack();
+			
+			//initialisation de l'envoyeur
+			try {
+				this.envoyeur = new Envoyeur(Inet4Address.getByName(MainActivity.IP), MainActivity.PORT);
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				if(this.activiteMere != null)
+				this.activiteMere.AfficherToast("Problème de configuration d'IP : Revoir les configurations");
+				//activiteMere.onBackPressed();
+			}
 		}
+		
 		
 	}
 	

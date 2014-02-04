@@ -15,6 +15,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.imageio.plugins.bmp.BMPImageWriteParam;
@@ -26,15 +27,16 @@ import javax.swing.SwingUtilities;
 public class ThreadLecture extends Thread {
 
 	
-	private ArrayList<Connexion> listThreadConnexion;
+	
+	private HashMap<Byte, Connexion> SetOfConnexions;
 	private boolean lectureActive;
 	private BufferedInputStream bufferDeReception;
 	private DatagramSocket socket;
 	private DatagramPacket paquetRecu;
 	private Fenetre fenetre;
 
-	public ThreadLecture(ArrayList<Connexion> a) {
-		this.listThreadConnexion = a;
+	public ThreadLecture(HashMap<Byte, Connexion> set) {
+		this.SetOfConnexions = set;
 		this.lectureActive = false;
 		try {
 			this.socket = new DatagramSocket(Main.PORT_UDP);
@@ -56,34 +58,33 @@ public class ThreadLecture extends Thread {
 			
 			
 			while (this.lectureActive) {
-				System.out.println("Lecture lanc�e ...");
+				//System.out.println("Lecture lanc�e ...");
 			  
 				this.socket.receive(this.paquetRecu);
 				
-				
-				for (Connexion c : this.listThreadConnexion) {
-					//Teste si le paquet re�u correspond � celui d'une des connections de notre liste (test en fonction de l'IP)
-					if(c.getIPDestinataire().equals(this.paquetRecu.getAddress())) {
-						poidImage = this.paquetRecu.getLength();
-						
-						try {				
-							
-							
-							ImageInputStream imageInputS = ImageIO.createImageInputStream(new ByteArrayInputStream(buffer, 0, poidImage));
-							
-							
-							BufferedImage bu = ImageIO.read(imageInputS);
-							Image image = bu;
-							c.getLabelImage().setIcon(new ImageIcon(image));
-							//this.fenetre.getPanel().repaint();
-							c.getPanel().repaint();
-							SwingUtilities.windowForComponent(c.getPanel()).pack();
-							//this.fenetre.pack(); // TODO A retirer peut etre selon le rendu
-						} catch (Exception e) { 
-							e.printStackTrace();
-						}
-						if(!Main.MultiClientSurMemeOrdi) break;
+				//teste de la connexion
+				if(this.SetOfConnexions.containsKey(buffer[0])) {
+					//Sélection de la bonne connexion
+					Connexion c = this.SetOfConnexions.get(buffer[0]);
+					
+					
+					poidImage = this.paquetRecu.getLength();
+
+					try {				
+
+						ImageInputStream imageInputS = ImageIO.createImageInputStream(new ByteArrayInputStream(buffer, 1, poidImage));
+
+
+						BufferedImage bu = ImageIO.read(imageInputS);
+						Image image = bu;
+						c.getLabelImage().setIcon(new ImageIcon(image));
+						c.getPanel().repaint();
+						SwingUtilities.windowForComponent(c.getPanel()).pack();
+					} catch (Exception e) { 
+						e.printStackTrace();
 					}
+						
+					
 				}
 				//On réinitialise le buffer
 				buffer = new byte[Main.bufferSize];
@@ -127,11 +128,12 @@ public class ThreadLecture extends Thread {
 	}
 
 	public int getNbConnexionsActives() {
-		return this.listThreadConnexion.size();
+		return this.SetOfConnexions.size();
 	}
 	
-	public void removeConnexionFromList(Connexion c) {
-		this.listThreadConnexion.remove(c);
+	public void removeConnexionFromList(Connexion c) {		
+		
+		this.SetOfConnexions.remove(c.getID_Connexion());
 	}
 
 }

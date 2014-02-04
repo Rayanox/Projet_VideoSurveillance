@@ -187,6 +187,7 @@ public class ServerActivity extends Activity {
 				if(this.verificationValidite(ip, port_TCP, port_UDP)) {
 					this.ChampsIP.setText(ip);
 					this.ChampsPortTCP.setText(port_TCP);
+					this.ChampsPortUDP.setText(port_UDP);
 				}
 				
 				
