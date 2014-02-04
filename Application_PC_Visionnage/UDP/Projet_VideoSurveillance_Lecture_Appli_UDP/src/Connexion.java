@@ -76,6 +76,9 @@ public class Connexion extends Thread{
 	public void updateLayoutFenetreRemove() {
 		if(this.threadDeLecture.getNbConnexionsActives()>0)
 		this.fenetre.modifierLayout(this.threadDeLecture.getNbConnexionsActives()-1);
+		
+		this.fenetre.repaint();
+		
 	}
 	
 	public void closeConnexion() {

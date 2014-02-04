@@ -28,6 +28,7 @@ public final class R {
     }
     public static final class id {
         public static final int BoutonPrisePhoto=0x7f080002;
+        public static final int StopperCapture=0x7f080010;
         public static final int action_settings=0x7f08001e;
         public static final int btn_captureGeneral=0x7f080003;
         public static final int btn_captureMode=0x7f080004;
@@ -40,7 +41,6 @@ public final class R {
         public static final int btn_demarrer=0x7f08000d;
         public static final int btn_generalEnregistrer=0x7f08000b;
         public static final int btn_generalRetour=0x7f08000c;
-        public static final int btn_modeEnregistrer=0x7f080011;
         public static final int btn_modeRetour=0x7f080012;
         public static final int btn_planifEnregistrer=0x7f080017;
         public static final int btn_plannifRetour=0x7f080018;
@@ -52,7 +52,7 @@ public final class R {
         public static final int edt_portServeurUDP=0x7f08001b;
         public static final int imageAffiche=0x7f080001;
         public static final int lstview_generalTypCap=0x7f08000a;
-        public static final int lstview_modeTypeMode=0x7f080010;
+        public static final int lstview_modeTypeMode=0x7f080011;
         public static final int spnr_planifHeureDebut=0x7f080013;
         public static final int spnr_planifHeureFin=0x7f080015;
         public static final int spnr_planifMinDebut=0x7f080014;
@@ -77,6 +77,7 @@ public final class R {
         public static final int main=0x7f070003;
     }
     public static final class string {
+        public static final int StopperCapture=0x7f050024;
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
         public static final int bouton_Retour=0x7f050002;

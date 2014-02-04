@@ -22,6 +22,11 @@ import java.net.SocketException;
 
 import javax.net.SocketFactory;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.os.Build;
+import android.os.StrictMode;
+
 import com.example.avds.MainActivity;
 
 public class Envoyeur {
@@ -72,8 +77,14 @@ public class Envoyeur {
 		return this.envoyeurDispo;
 	}
 	
+	@SuppressLint("NewApi")
+	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	public void envoyerDonnees(byte[] datas) {	
 		
+		
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+	      StrictMode.setThreadPolicy(policy);
+	      System.out.println("");
 			try {
 				this.envoyeurDispo = false;
 				DatagramPacket packetEnvoie = new DatagramPacket(datas, datas.length, InetAddress.getByName(MainActivity.IP), MainActivity.PORT_UDP);

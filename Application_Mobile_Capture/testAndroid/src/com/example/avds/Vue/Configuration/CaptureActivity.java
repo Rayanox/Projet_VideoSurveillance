@@ -5,6 +5,8 @@ import com.example.testandroid.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -54,4 +56,6 @@ public class CaptureActivity extends Activity {
 			  }
 			});	 
 	}
+
+	
 }

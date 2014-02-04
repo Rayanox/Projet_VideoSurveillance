@@ -9,7 +9,9 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.List;
 
+import com.example.avds.Modele.Captureur;
 import com.example.avds.Modele.Envoyeur;
 import com.example.avds.Modele.Module_Arborescence_Fichier;
 import com.example.avds.Vue.Capture.CameraRunActivity;
@@ -20,11 +22,15 @@ import com.example.testandroid.R;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.view.ActionMode;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -62,20 +68,35 @@ public class MainActivity extends Activity {
 	public static int PORT_UDP = -1; // Note : (2001 : Port par défaut)
 	public static int bufferSize = 30000; //Taille maximale d'un fichier image (� r�duire au plus possible en fonction de la taille des images que l'on va envoyer)
 
-	//--- TODO A retirer----
-	public static final String PATH_FILE_IN1 = Environment.getExternalStorageDirectory().getPath()+"/Download/TestMe.jpg";
-	public static final String PATH_FILE_IN2 = Environment.getExternalStorageDirectory().getPath()+"/Download/TestMe.jpg";
-	//----------------------
-	
 	
 	public static String PATH_FICHIER_CONFIG ; // Défini à la création du programme car on ne pouvait pas faire appel à la méthode qui permet de trouver le fichier père interne du télépone car la méthode n'était pas static.
 	
+	public static boolean lectureActive = false;
+	public static boolean plannificationActive = false; // Lock le programme pour ne pas qu'on puisse le détruire si une plannification a été définie.
+	public static boolean modeSecret = false;	
+	
+	private Context context = this;
+	private Button StopCaptureButton;
+	
+	@Override
+	public void onBackPressed() {
+	
+		if(MainActivity.lectureActive || MainActivity.plannificationActive) {
+			moveTaskToBack(true);
+		} else super.onBackPressed();
 		
-	// Méthode overridée qui est automatquement appelée en fin de vue.
+		
+	}
+	
+	// Méthode overridée qui est automatquement appelée en fin d'activité.
 	public void onDestroy() {
-		System.out.println("On quitte le programme");
 		
+		
+		System.out.println("On quitte le programme");	
 		super.onDestroy();
+		
+		
+		
 	}
 	
 	
@@ -99,12 +120,25 @@ public class MainActivity extends Activity {
 		  }
 		});
 		  
+		this.StopCaptureButton = (Button) findViewById(R.id.StopperCapture);
+		this.StopCaptureButton.setOnClickListener(new OnClickListener() {
+					
+		  @Override
+		  public void onClick(View v) {
+			  MainActivity.lectureActive = false;
+			  StopCaptureButton.setVisibility(View.GONE);
+		  }
+		});
+		
+		StopCaptureButton.setVisibility(View.GONE); //invisible car inutile pour au départ
+		
+		
 		  final Button QuitButton = (Button) findViewById(R.id.btn_quitter);
 		  QuitButton.setOnClickListener(new OnClickListener() {
 					
 		  @Override
 		  public void onClick(View v) {			  
-			finish(); //TODO vérifier à quoi ela sert 
+			onBackPressed();  
 		  }
 		});
 		  
@@ -113,32 +147,47 @@ public class MainActivity extends Activity {
 			  @Override
 			  public void onClick(View v) {  			  
 				  
-				  
-				  		// Si le fichier de configuration a été chargé, on lance l'activité de capture et d'envoie
-				  		if(chargerFichierConfig()) {
+				  if(!MainActivity.lectureActive){
+				  	if(!MainActivity.plannificationActive) {
+				  	// Si le fichier de configuration a été chargé, on lance l'activité de capture et d'envoie
+				  		if(chargerFichierConfig(context)) {
 				  			
 				  			//TODO Je ne sais plus à quoi ça sert, à retrouver sur internet, mais ça sera probablement à supprimé par rapport aux changements qui ont été fait ici.	
 							StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();	
 							StrictMode.setThreadPolicy(policy);
 							
 							// Lancement de la vue de capture
-							Intent intent = new Intent(getThis(), CameraRunActivity.class);
+							if(MainActivity.modeSecret) {
+								Captureur captureur = new Captureur(null,getThis() ,null); 
+								captureur.start();
+								StopCaptureButton.setVisibility(View.VISIBLE);
+							} else {
+								Intent intent = new Intent(getThis(), CameraRunActivity.class);
 								startActivity(intent);
+							}
+							AfficherToast(getThis(), "Lancement de la capture");
+							
 				  			
 				  		}else { // Sinon  on affiche un message d'erreur et on ne fait rien.
 				  		
-				  			AfficherToast("Les configurations n'ont pas été parametrées : merci de les remplir dans la rubrique Configuration du serveur");
+				  			AfficherToast(context, "Les configurations n'ont pas été parametrées : merci de les remplir dans la rubrique Configuration du serveur");
 				  							  			
 				  		}	
+				  	} else {
+				  		AfficherToast(context, "Une plannification est déjà activée : vous ne pouvez pas lancer de capture");
+				  	}
+				  } else {
+					  AfficherToast(context, "Une lecture est déjà en cours");
+				  }
 			  }
 		});  
 	}
 	
-	public void AfficherToast(final String texte) {
-		Toast.makeText(this, texte, Toast.LENGTH_LONG).show();		
+	public static void AfficherToast(Context context, final String texte) {
+		Toast.makeText(context, texte, Toast.LENGTH_LONG).show();		
 	}
 	
-	public boolean chargerFichierConfig() {
+	public static boolean chargerFichierConfig(Context context) {
 		File fichierConfig = new File(MainActivity.PATH_FICHIER_CONFIG);
 		
 		if(!fichierConfig.exists() || fichierConfig.isDirectory()) {			
@@ -166,7 +215,8 @@ public class MainActivity extends Activity {
 				try {
 					var = reader.readLine();
 				} catch (IOException e) {
-					this.AfficherToast("Erreur lors de la lecture du buffer du fichier de config");
+					if(context!=null)
+					AfficherToast(context, "Erreur lors de la lecture du buffer du fichier de config");
 					return false;
 				}
 				if(var == null) { // Si une des lignes est manquantes, c'est que le fichier n'est pas correct
@@ -176,7 +226,7 @@ public class MainActivity extends Activity {
 				switch(i) {
 				case 0 :
 					ip = var;
-					if(!this.VerifieIPValid(ip)) return false;
+					if(!VerifieIPValid(ip)) return false;
 					break;
 				case 1 :
 					port_TCP = var;
@@ -211,12 +261,13 @@ public class MainActivity extends Activity {
 			return true;
 			
 		} catch (FileNotFoundException e) {
-			this.AfficherToast("Erreur lors de la lecture du buffer du fichier de config");
+			if(context!=null)
+			AfficherToast(context, "Erreur lors de la lecture du buffer du fichier de config");
 			return false;
 		}		
 	}
 	
-	private boolean VerifiePortValid(String port) {
+	private static boolean VerifiePortValid(String port) {
 		int nb;
 		try {
 			nb = Integer.parseInt(port);
@@ -226,7 +277,7 @@ public class MainActivity extends Activity {
 		return nb > 0;
 	}
 	
-	private boolean VerifieIPValid(String host) {
+	private static boolean VerifieIPValid(String host) {
 		try {
 			Inet4Address.getByName(host);
 		} catch (UnknownHostException e) {
@@ -238,5 +289,8 @@ public class MainActivity extends Activity {
 	
 	public MainActivity getThis() {
 		return this;
+		
 	}
+	
+	
 }

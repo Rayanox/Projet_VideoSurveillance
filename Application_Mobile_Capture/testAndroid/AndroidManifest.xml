@@ -31,7 +31,7 @@
         </activity>
         <activity android:name="com.example.avds.Vue.Configuration.CaptureActivity" >
         </activity>
-        <activity android:name="com.example.avds.Vue.Configuration.ModeActivity.avds.ModeActivity" >
+        <activity android:name="com.example.avds.Vue.Configuration.ModeActivity" >
         </activity>
         <activity android:name="com.example.avds.Vue.Configuration.PlanificationActivity" >
         </activity>
@@ -44,6 +44,9 @@
         <activity android:name="com.example.avds.Vue.Capture.CameraRunActivity" 
             android:parentActivityName="@string/app_name">
         </activity>
+        <service android:name="com.example.avds.Modele.ServiceDeCapture"/>
+        <service android:name="com.example.avds.Modele.ServiceTest"/>
+        
     </application>
 
     
